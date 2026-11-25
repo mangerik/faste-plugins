@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "faste-media",
   "version": "1.1.0",
   "description": "Generate, edit, upscale, and animate AI images and videos via Faste Media BaaS MCP with OAuth 2.1, pre-flight credit estimation, QRIS top-up links, and scoped API key guardrails.",
