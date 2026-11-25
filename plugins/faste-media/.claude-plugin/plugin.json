@@ -10,8 +10,6 @@
   },
   "homepage": "https://faste.dev/docs#agent-harnesses",
   "repository": "https://github.com/mangerik/faste-plugins",
-  "privacyPolicyUrl": "https://faste.dev/privacy",
-  "icon": "./.claude-plugin/icon.png",
   "license": "MIT",
   "keywords": [
     "mcp",

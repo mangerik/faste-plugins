@@ -13,6 +13,6 @@ Call `get_account_balance()` on the `faste-media` MCP server and summarize the r
    - Daily spend usage vs daily cap (`key_daily_spend_used_today / key_daily_spend_limit_credits`)
    - Key expiration timestamp (`key_expires_at`), warning if expiring soon.
 
-Never print or echo the raw `FASTE_API_KEY` value. If balance is low:
+Never print or echo raw API keys or OAuth tokens. If balance is low:
 - If `billing:write` is included in `key_scopes`, offer to generate a QRIS payment link via `create_topup` after the user confirms the Rupiah nominal (minimum Rp 25.000, maximum Rp 496.200, multiple of Rp 100), then verify settlement via `get_topup_status`.
 - If `billing:write` is **not** in `key_scopes` (e.g., restricted `agent` preset key), inform the user that top-ups must be initiated using a key with `billing:write` permission.
