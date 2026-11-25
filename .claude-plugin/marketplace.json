@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "faste-plugins",
+  "owner": {
+    "name": "Faste",
+    "email": "erikhidayatullah23@gmail.com"
+  },
+  "metadata": {
+    "version": "1.1.0",
+    "description": "Official Faste Media BaaS plugins for Claude Desktop, Cowork, and Claude Code — white-label AI image and video generation with OAuth 2.1, pre-flight credit estimation, and QRIS top-up links."
+  },
+  "plugins": [
+    {
+      "name": "faste-media",
+      "source": "./plugins/faste-media",
+      "description": "Generate, edit, upscale, and animate AI images and videos via Faste Media BaaS MCP with OAuth 2.1, pre-flight credit estimation, QRIS top-up links, and scoped API key guardrails.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Faste",
+        "email": "erikhidayatullah23@gmail.com"
+      },
+      "homepage": "https://faste.dev/docs#agent-harnesses",
+      "repository": "https://github.com/mangerik/faste-plugins",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "mcp",
+        "image-generation",
+        "video-generation",
+        "ai-media",
+        "qris",
+        "faste"
+      ],
+      "tags": [
+        "mcp",
+        "image-generation",
+        "video-generation",
+        "oauth",
+        "faste"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "faste-media": {
+      "type": "http",
+      "url": "https://api.faste.dev/mcp"
+    }
+  }
+}
