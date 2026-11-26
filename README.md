@@ -31,7 +31,7 @@ Then run `/mcp` to authenticate via OAuth 2.1, or verify with `/check-balance`.
 
 | Plugin | Version | Description |
 | :--- | :---: | :--- |
-| **[`faste-media`](./plugins/faste-media)** | `1.3.0` | Remote Streamable HTTP MCP (`https://api.faste.dev/mcp` via OAuth 2.1) with interactive MCP Apps Media Viewer & QRIS Top-Up Card, `faste-media-gen` Agent Skill, and 4 slash commands (`/generate-image`, `/generate-video`, `/check-balance`, `/topup-credits`). |
+| **[`faste-media`](./plugins/faste-media)** | `1.3.1` | Remote Streamable HTTP MCP (`https://api.faste.dev/mcp` via OAuth 2.1) with interactive MCP Apps Media Viewer & QRIS Top-Up Card, `faste-media-gen` Agent Skill, and 4 slash commands (`/generate-image`, `/generate-video`, `/check-balance`, `/topup-credits`). |
 
 ---
 

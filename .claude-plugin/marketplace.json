@@ -5,7 +5,7 @@
     "email": "erikhidayatullah23@gmail.com"
   },
   "metadata": {
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "Official Faste Media BaaS plugins for Claude Desktop, Cowork, and Claude Code — white-label AI image and video generation with interactive MCP Apps preview/download widgets, OAuth 2.1, pre-flight credit estimation, and QRIS top-up links."
   },
   "plugins": [
@@ -13,7 +13,7 @@
       "name": "faste-media",
       "source": "./plugins/faste-media",
       "description": "Generate, edit, upscale, and animate AI images and videos via Faste Media BaaS MCP with interactive MCP Apps preview/playback/download widgets, OAuth 2.1, pre-flight credit estimation, QRIS top-up links, and scoped API key guardrails.",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "author": {
         "name": "Faste",
         "email": "erikhidayatullah23@gmail.com"
