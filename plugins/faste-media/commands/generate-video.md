@@ -8,7 +8,7 @@ Generate a video using the `faste-media` MCP server based on the user's request:
 Follow this exact safe workflow:
 1. If `$ARGUMENTS` is empty, ask the user for the video concept, desired duration/resolution, and whether they have a reference/first-frame image.
 2. Call `list_models(modality="video")` to check permitted video models for the current API key.
-3. Choose the appropriate model (`minimax-h3-t2v` / `wan-3.0-video-prime` for text-to-video, `minimax-h3-i2v` / `gemini-omni-1.2-flash` / `seedance-2.5` for image-to-video, `minimax-h3-ref2v` for multi-reference video, or `video-upscale` for upscaling).
+3. Choose the appropriate model (`magi-2-t2v` / `minimax-h3-t2v` / `wan-3.0-video-prime` for text-to-video, `magi-2-i2v` / `minimax-h3-i2v` / `gemini-omni-1.2-flash` / `seedance-2.5` for image-to-video, `magi-2-ref2v` / `minimax-h3-ref2v` for multi-reference video, or `video-upscale` for upscaling).
 4. Call `get_model_schema(model_id=...)` to inspect exact parameter names (note enum casing such as `720P` vs `720p` and duration ranges).
 5. If animating a local workspace image, upload it via `upload_local_media` first (when using local `faste-mcp`).
 6. **MANDATORY COST CHECK:** Call `estimate_cost(model=..., input=...)` and `get_account_balance()`. Report the exact estimated Credits and IDR (`1 Credit = Rp 100`) to the user and **ask for explicit confirmation before submitting** whenever estimated cost exceeds 50 Credits (Rp 5.000) or the user has not pre-approved spending.
