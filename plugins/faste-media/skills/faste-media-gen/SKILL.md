@@ -59,7 +59,9 @@ If `status` is `queued` or `processing` (or `timed_out_waiting: true`):
   - `failed`: Check `error.code` and `error.message`; reserved credits are refunded automatically.
 
 ### Step 7: Deliver Output & Retention Notice
-- Share the white-label CDN URL(s) and actual credits spent (`actual_credits` and IDR value).
+- On MCP Apps-capable hosts (such as Claude.ai, Claude Desktop, Cowork, and ChatGPT), Faste automatically renders an interactive **Media Viewer** widget (inline image zoom, video/audio playback, live status polling, and one-click Download / Download All) alongside a **QRIS Top-Up Card** for billing tools.
+- Succeeded image jobs also attach a compact visual preview directly in the tool result so you can visually inspect the generated image, verify prompt accuracy, and describe or iterate on it with the user.
+- Still share the white-label CDN URL(s) concisely (as a fallback for CLI/text harnesses) along with actual credits spent (`actual_credits` and IDR value).
 - Always remind the user that output media on `https://obj.faste.dev` is retained for **30 days** — download or persist important assets before expiration.
 - If the user wants the output saved to their workspace and local `faste-mcp` is active, call `download_media(media_url="https://obj.faste.dev/...", output_path="assets/output.png", overwrite=false)`.
 
