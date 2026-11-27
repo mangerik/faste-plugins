@@ -36,9 +36,9 @@ Call `get_account_balance` to see:
 ### Step 3: Prepare Input Media (For I2I, I2V, Upscale, Reference-to-Video)
 - If the user provides an existing public HTTPS image/video URL, pass it directly in `input`.
 - If the user references a **local file** inside the workspace AND the local `faste-mcp` CLI is active:
-  1. Call `upload_local_media(file_path="relative/path/to/image.png")`.
+  1. Call `upload_local_media(file_path="relative/path/to/image.png", project_id="<optional prj_...>")`.
   2. Pass the returned `media_url` (`https://obj.faste.dev/...`) into `generate_media.input`.
-  - Note: Local uploads are sandboxed to `FASTE_WORKSPACE_ROOT`, verified via magic bytes (`jpeg`, `png`, `webp`, `mp4`, `webm`), and expire after **24 hours**.
+  - Note: Local uploads are sandboxed to `FASTE_WORKSPACE_ROOT` and verified via magic bytes (`jpeg`, `png`, `webp`, `mp4`, `webm`). Standard uploads expire after **24 hours**, while uploads linked to an active `project_id` are stored **permanently** under the project.
 - If running Remote MCP only (without local CLI tools), ask the user for a public HTTPS URL or instruct them to upload via `POST /v1/media/upload-url`.
 
 ### Step 4: Pre-Flight Cost Estimation
@@ -48,8 +48,9 @@ Call `estimate_cost(model="<model_id>", input={...})`.
 - Ask the user to confirm if `estimated_credits > 50` (Rp 5.000) or if submitting a batch of jobs.
 
 ### Step 5: Submit Job (`generate_media`)
-- **Images (fast, ~5–40s):** Call `generate_media(model=..., input=..., wait=true, timeout_sec=90, idempotency_key=...)`.
-- **Videos (slower, ~30s–5m):** Call `generate_media(model=..., input=..., wait=false, idempotency_key=...)` to avoid client timeout, then proceed to Step 6.
+- If working inside a Creative Project, pass `project_id`, a human-readable `node_key` (e.g., `hero_img`, `scene_01_vid`), optional `node_title`, and optional `parent_links`. Reusing any prior project node's `media_url` inside `input` automatically records DAG lineage edges (`first_frame`, `last_frame`, `image_url`, `reference_image`, `motion_video`, `audio_track`, etc.).
+- **Images (fast, ~5–40s):** Call `generate_media(model=..., input=..., project_id=..., node_key=..., wait=true, timeout_sec=90, idempotency_key=...)`.
+- **Videos (slower, ~30s–5m):** Call `generate_media(model=..., input=..., project_id=..., node_key=..., wait=false, idempotency_key=...)` to avoid client timeout, then proceed to Step 6.
 
 ### Step 6: Monitor Async Jobs (`get_job_status`)
 If `status` is `queued` or `processing` (or `timed_out_waiting: true`):
@@ -62,8 +63,25 @@ If `status` is `queued` or `processing` (or `timed_out_waiting: true`):
 - On MCP Apps-capable hosts (such as Claude.ai, Claude Desktop, Cowork, and ChatGPT), Faste automatically renders an interactive **Media Viewer** widget (inline image zoom, video/audio playback, live status polling, and one-click Download / Download All) alongside a **QRIS Top-Up Card** for billing tools.
 - Succeeded image jobs also attach a compact visual preview directly in the tool result so you can visually inspect the generated image, verify prompt accuracy, and describe or iterate on it with the user.
 - Still share the white-label CDN URL(s) concisely (as a fallback for CLI/text harnesses) along with actual credits spent (`actual_credits` and IDR value).
-- Always remind the user that output media on `https://obj.faste.dev` is retained for **30 days** — download or persist important assets before expiration.
+- Retention notice: Standalone output media on `https://obj.faste.dev` is retained for **30 days**; media linked to an active **Creative Project** (`project_id`) is retained **permanently** while the project remains active.
 - If the user wants the output saved to their workspace and local `faste-mcp` is active, call `download_media(media_url="https://obj.faste.dev/...", output_path="assets/output.png", overwrite=false)`.
+
+---
+
+## Creative Projects & Cross-Session DAG Flow Workflow
+
+Use Faste **Creative Projects** (`prj_*`) whenever the user is producing a multi-step campaign, storyboard, or chained image/video workflow — or asks to continue a project started in another AI session (Claude, ChatGPT, Codex, Hermes, etc.):
+
+1. **Discover or Create a Project:**
+   - Call `list_projects(query="...")` (or read resource `faste://projects`) to find an existing project mentioned by the user.
+   - Or call `create_project(name="...", description="...", creative_brief={...})` to start a new shared workspace (requires `projects:write`).
+2. **Inspect Full DAG Context Across Sessions:**
+   - Call `get_project_graph(project_id="prj_...")` (or read `faste://projects/{project_id}`) to inspect every node (`node_key`, `kind`, `modality`, `media_url`, `job_status`), typed lineage edge (`source_node_key -> target_node_key [input_slot]`), and credit summary before generating the next step.
+3. **Register Source Assets or Notes:**
+   - Call `add_project_node(project_id=..., kind="source_media" | "prompt_note", node_key="...", title="...", media_asset_id=... | media_url=...)` to pin reference assets or store creative notes inside the DAG. Temporary uploaded assets are automatically pinned into permanent project storage.
+4. **Chain Generations with Auto-Lineage:**
+   - Pass `project_id`, `node_key`, and `node_title` to `generate_media`. Passing any previous node's `media_url` in `input` (`image_url`, `end_image_url`, `reference_images`, `motion_video_url`, `audio_url`, etc.) automatically draws typed DAG edges.
+   - Use `parent_links` or `connect_project_nodes` when adding conceptual links (e.g., `derived_from`, `prompt_context`). Cycles are rejected automatically to keep the canvas DAG valid.
 
 ---
 

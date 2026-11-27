@@ -13,7 +13,9 @@ Always provision a **dedicated agent API key** using `"preset": "agent"` rather 
 | `models:read` | Yes | List active models and inspect JSON Schemas |
 | `jobs:read` | Yes | Check job status and list job history |
 | `jobs:write` | Yes | Submit media generation jobs |
-| `media:upload` | Yes | Request presigned input upload URLs |
+| `media:upload` | Yes | Request presigned input upload URLs (temporary or permanent project sources) |
+| `projects:read` | Yes | List Creative Projects and inspect full DAG Flow Graphs (`faste://projects/*`) |
+| `projects:write` | Yes | Create/update Creative Projects, pin source nodes, connect DAG edges, and save layout |
 | `billing:read` | Yes | Check credit balance, daily key spend, and QRIS top-up order status (`get_topup_status`) |
 | `billing:write` | **No (Denied)** | Creating QRIS top-up payment links (`create_topup`) requires explicit `billing:write` scope and still requires manual human QRIS payment |
 

@@ -2,7 +2,7 @@
 
 Official public plugin marketplace for **[Faste Media BaaS](https://faste.dev)** (`https://api.faste.dev/mcp`), compatible with **Claude Desktop**, **Cowork**, and **Claude Code**.
 
-Faste provides a single white-label gateway for 16 production AI image and video models with integer Rupiah credits (`1 Credit = Rp 100`), QRIS balance top-ups, interactive **MCP Apps** media preview/playback/download widgets, automatic visual image inspection for Claude, scoped API key guardrails, and native **OAuth 2.1 + PKCE (`S256`)** sign-in.
+Faste provides a single white-label gateway for 16 production AI image and video models with **Creative Projects & Cross-Session DAG Flow Graph** (`prj_*`), permanent media storage for active projects, integer Rupiah credits (`1 Credit = Rp 100`), QRIS balance top-ups, interactive **MCP Apps** media preview/playback/download widgets, automatic visual image inspection for Claude, scoped API key guardrails, and native **OAuth 2.1 + PKCE (`S256`)** sign-in.
 
 ---
 
@@ -31,14 +31,14 @@ Then run `/mcp` to authenticate via OAuth 2.1, or verify with `/check-balance`.
 
 | Plugin | Version | Description |
 | :--- | :---: | :--- |
-| **[`faste-media`](./plugins/faste-media)** | `1.3.1` | Remote Streamable HTTP MCP (`https://api.faste.dev/mcp` via OAuth 2.1) with interactive MCP Apps Media Viewer & QRIS Top-Up Card, `faste-media-gen` Agent Skill, and 4 slash commands (`/generate-image`, `/generate-video`, `/check-balance`, `/topup-credits`). |
+| **[`faste-media`](./plugins/faste-media)** | `1.4.0` | Remote Streamable HTTP MCP (`https://api.faste.dev/mcp` via OAuth 2.1) with Creative Projects & DAG Flow Graph (`create_project`, `list_projects`, `get_project_graph`, `add_project_node`, `connect_project_nodes`), interactive MCP Apps Media Viewer & QRIS Top-Up Card, `faste-media-gen` Agent Skill, and 4 slash commands (`/generate-image`, `/generate-video`, `/check-balance`, `/topup-credits`). |
 
 ---
 
 ## Security, Privacy & Support
 
 - **OAuth 2.1 + Live Policy Inheritance:** OAuth access tokens (`faste_at_*`) inherit your source API key's exact `scopes`, `allowed_models`, `max_credits_per_job`, `daily_spend_limit_credits`, and `expires_at`. Revoking the API key immediately disconnects all active sessions.
-- **Media Retention:** Generated outputs on `https://obj.faste.dev` are automatically deleted after 30 days; uploaded inputs expire after 24 hours.
+- **Media Retention:** Standalone outputs on `https://obj.faste.dev` are automatically deleted after 30 days and standalone uploads expire after 24 hours; assets linked to an active **Creative Project** are retained permanently while the project remains active.
 - **Privacy Policy:** https://faste.dev/privacy
 - **Terms of Service:** https://faste.dev/terms
 - **Changelog:** https://faste.dev/changelog
